@@ -36,26 +36,23 @@ import org.junit.jupiter.api.Test;
 /**
  * This test will illustrate how you can use lambdas with older JDK Single Abstract Method types
  * like Comparator, Runnable and Callable.
- *
  * Please refer to this tutorial for an overview of Lambdas for Java 8.
  * @see <a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html">Lambda Quickstart</a>
  *
  * Then follow the TODOs in each test and convert the anonymous inner classes to lambdas and/or method references.
  */
-public class ClassicSAMInterfaceTest
+class ClassicSAMInterfaceTest
 {
     @Test
-    public void comparator()
+	void comparator()
     {
-        // TODO - Convert the comparator to a lambda and then to a method reference
-        var comparator = new Comparator<Integer>()
-        {
-            @Override
-            public int compare(Integer one, Integer two)
-            {
-                return one.compareTo(two);
-            }
-        };
+
+		// comparator converted to a lambda function
+		// Comparator<Integer> comparator = (a,b) ->  a.compareTo(b);
+
+		//comparator converted to a method reference
+		Comparator<Integer> comparator = Integer::compareTo;
+
         Assertions.assertEquals(0, comparator.compare(1, 1));
         Assertions.assertEquals(-1, comparator.compare(1, 2));
         Assertions.assertEquals(1, comparator.compare(3, 2));
@@ -68,7 +65,7 @@ public class ClassicSAMInterfaceTest
     }
 
     @Test
-    public void runnable()
+    void runnable()
     {
         // Note: The following list reference is "effectively" final, which is a new feature in Java 8
         var list = new ArrayList<Integer>();
@@ -97,7 +94,7 @@ public class ClassicSAMInterfaceTest
     }
 
     @Test
-    public void callable() throws Exception
+    void callable() throws Exception
     {
         // Note: The following set references is "effectively" final, which is a new feature in Java 8
         var set = new HashSet<Integer>();
