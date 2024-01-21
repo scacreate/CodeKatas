@@ -69,26 +69,14 @@ class ClassicSAMInterfaceTest
     {
         // Note: The following list reference is "effectively" final, which is a new feature in Java 8
         var list = new ArrayList<Integer>();
-        // TODO - convert the anonymous Inner class to a lambda
-        var runnable = new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                list.add(1);
-            }
-        };
-        runnable.run();
-        Assertions.assertEquals(List.of(1), list);
-        // TODO - convert the anonymous Inner class to a lambda
-        Interval.fromTo(2, 10).run(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                list.add(1);
-            }
-        });
+
+		//runnable interface converted to lambda
+		Runnable r = () -> list.add(1);
+		r.run();
+		Assertions.assertEquals(List.of(1), list);
+
+		//runnable interface converted to lambda
+		Interval.fromTo(2, 10).run(r);
         var expectedList = Collections.nCopies(10, 1);
         Assertions.assertEquals(expectedList, list);
     }
