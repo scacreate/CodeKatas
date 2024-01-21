@@ -86,15 +86,10 @@ class ClassicSAMInterfaceTest
     {
         // Note: The following set references is "effectively" final, which is a new feature in Java 8
         var set = new HashSet<Integer>();
-        // TODO - convert the anonymous inner class to lambda
-        var callable = new Callable<Boolean>()
-        {
-            @Override
-            public Boolean call() throws Exception
-            {
-                return set.add(1);
-            }
-        };
+
+		//callable interface converted to lambda
+		Callable<Boolean> callable = () -> set.add(1);
+
         Assertions.assertTrue(callable.call());
         Assertions.assertEquals(Set.of(1), set);
 
